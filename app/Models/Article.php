@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
@@ -26,5 +27,17 @@ class Article extends Model
     // par exemple récupérer tous les articles d'un utilisateur
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    // Génération automatique du slug avant la création
+    protected static function boot() {
+        parent::boot();
+
+        // Avant de créer un article, on génère le slug
+        static::creating(function ($article) {
+            if (empty($article->slug)) {
+                $article->slug = Str::slug($article->title);
+            }
+        });
     }
 }

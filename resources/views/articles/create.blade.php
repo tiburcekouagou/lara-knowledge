@@ -6,7 +6,6 @@
     <div>
         <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
             <!-- Titre -->
             <x-input-label for="title" value="Titre" />
             <x-text-input id="title" name="title" type="text" autofocus />

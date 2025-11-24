@@ -9,11 +9,14 @@ use App\Http\Requests\UpdateArticleRequest;
 class ArticleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of articles.
      */
     public function index()
     {
-        //
+        // On récupère tous les articles, du plus récent au plus vieux.
+        $articles = Article::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
+
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -21,7 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**

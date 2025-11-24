@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     })->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::resource('articles', ArticleController::class);
 });
 
 require __DIR__.'/auth.php';

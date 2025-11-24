@@ -29,6 +29,12 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    // Utilisation du slug pour la résolution des routes
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
+
     // Génération automatique du slug avant la création
     protected static function boot() {
         parent::boot();
